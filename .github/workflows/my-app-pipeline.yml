@@ -47,7 +47,6 @@ jobs:
 
       - name: install jetbrains tool
         run: dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path $env:DOTNET_TOOLS_PATH
-        shell: pwsh
         env:
           DOTNET_TOOLS_PATH: ${{ github.workspace }}
 
@@ -59,13 +58,11 @@ jobs:
       
       - name: install report generator tool
         run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path $DOTNET_TOOLS_PATH
-        shell: pwsh
         env:
           DOTNET_TOOLS_PATH: ${{ github.workspace }}
       
       - name: run report generator
         run: ."$DOTNET_TOOLS_PATH\reportgenerator.exe" -reports:reports\coverage.cobertura.xml -targetdir:reports\coveragereport -reporttypes:Html
-        shell: pwsh
         env:
           DOTNET_TOOLS_PATH: ${{ github.workspace }}
 
