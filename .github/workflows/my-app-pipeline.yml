@@ -43,7 +43,7 @@ jobs:
 
               # Runs a single command using the runners shell
       - name: test
-        run: dotnet -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=reports/coverage
+        run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=reports/coverage
 
       - name: install jetbrains tool
         run: dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path $env:DOTNET_TOOLS_PATH
