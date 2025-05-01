@@ -50,7 +50,10 @@ jobs:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
 
       - name: run code inspection
-        run: ."$env:DOTNET_TOOLS_PATH\jb.exe" inspectcode ./TrainProject.sln -o=reports/report
+        run: |
+          $jbPath = "$env:DOTNET_TOOLS_PATH\jb.exe"
+          & $jbPath inspectcode ./TrainProject.sln -o=reports/report
+
 
       - name: run code inspection validation
         run: cd "../scripts"; ./validate_report.ps1
