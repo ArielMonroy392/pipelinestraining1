@@ -47,7 +47,7 @@ jobs:
       - name: install jetbrains tool
         run: dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path $env:DOTNET_TOOLS_PATH
         env:
-          DOTNET_TOOLS_PATH: ${{ env.DOTNET_TOOLS_PATH }}
+          DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
 
       - name: run code inspection
         run: ."$DOTNET_TOOLS_PATH\jb.exe" inspectcode ./TrainProject.sln -o=reports/report
@@ -58,12 +58,12 @@ jobs:
       - name: install report generator tool
         run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path $DOTNET_TOOLS_PATH
         env:
-          DOTNET_TOOLS_PATH: ${{ env.DOTNET_TOOLS_PATH }}
+          DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
       
       - name: run report generator
         run: ."$DOTNET_TOOLS_PATH\reportgenerator.exe" -reports:reports\coverage.cobertura.xml -targetdir:reports\coveragereport -reporttypes:Html
         env:
-          DOTNET_TOOLS_PATH: ${{ env.DOTNET_TOOLS_PATH }}
+          DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
 
   publish:
     # The type of runner that the job will run on
