@@ -49,19 +49,13 @@ jobs:
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
 
-      - name: Debug DOTNET_TOOLS_PATH
-        run: |
-          echo "DOTNET_TOOLS_PATH is: $env:DOTNET_TOOLS_PATH"
-        env:
-          DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
-        
-
       - name: run code inspection
         run: |
-          $jbPath = "$env:DOTNET_TOOLS_PATH\jb.exe"
+         $jbPath = Join-Path $env:DOTNET_TOOLS_PATH "jb.exe"
+          Write-Host "Using JetBrains tool at $jbPath"
           & $jbPath inspectcode ./TrainProject.sln -o=reports/report
-
-
+        env:
+          DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
       - name: run code inspection validation
         run: cd "../scripts"; ./validate_report.ps1
       
