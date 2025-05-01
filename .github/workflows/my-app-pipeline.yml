@@ -49,6 +49,14 @@ jobs:
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
 
+      - name: Debug DOTNET_TOOLS_PATH
+        shell: pwsh
+        run: |
+          echo "DOTNET_TOOLS_PATH is: $env:DOTNET_TOOLS_PATH"
+        env:
+          DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
+        
+
       - name: run code inspection
         run: |
           $jbPath = "$env:DOTNET_TOOLS_PATH\jb.exe"
