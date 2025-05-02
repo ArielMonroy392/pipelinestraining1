@@ -69,9 +69,8 @@ jobs:
       
       - name: run report generator
         run: |
-          cd myApp.Tests
           $reportGenPath = Join-Path $env:DOTNET_TOOLS_PATH "reportgenerator.exe"
-          & $reportGenPath -reports:reports\coverage.cobertura.xml -targetdir:myApp.Tests\reports\coveragereport -reporttypes:Html
+          & $reportGenPath -reports:myApp.Tests\reports\coverage.cobertura.xml -targetdir:myApp.Tests\reports\coveragereport -reporttypes:Html
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
 
