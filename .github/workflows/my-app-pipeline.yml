@@ -56,7 +56,7 @@ jobs:
           cd myApp
           $jbPath = Join-Path $env:DOTNET_TOOLS_PATH "jb.exe"
           Write-Host "Using JetBrains tool at $jbPath"
-          & $jbPath inspectcode ./TrainProject.sln -o=reports/report
+          & $jbPath inspectcode ../TrainProject.sln -o=reports/report
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
       - name: run code inspection validation
