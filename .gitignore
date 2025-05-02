@@ -386,4 +386,4 @@ FodyWeavers.xsd
 .vscode/tasks.json
 myApp.Tests/reports/**/*
 actions-runner/*
-reports/*
+/**/reports/*
