@@ -63,14 +63,14 @@ jobs:
           cd myApp
           & "${{ github.workspace }}/scripts/validate_report.ps1"
       - name: install report generator tool
-        run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path $DOTNET_TOOLS_PATH
+        run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path $env:DOTNET_TOOLS_PATH
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
       
       - name: run report generator
         run: |
           $reportGenPath = Join-Path $env:DOTNET_TOOLS_PATH "reportgenerator.exe"
-          & $reportGenPath -reports:reports\coverage.cobertura.xml -targetdir:reports\coveragereport -reporttypes:Html
+          & $reportGenPath -reports:reports\coverage.cobertura.xml -targetdir:myApp.Tests\reports\coveragereport -reporttypes:Html
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
 
