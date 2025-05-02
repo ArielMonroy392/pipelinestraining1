@@ -55,11 +55,12 @@ jobs:
         run: |
           $jbPath = Join-Path $env:DOTNET_TOOLS_PATH "jb.exe"
           Write-Host "Using JetBrains tool at $jbPath"
-          & $jbPath inspectcode ./TrainProject.sln -o=myApp/reports/report
+          & $jbPath inspectcode ./TrainProject.sln -o=myAppreports/report
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
       - name: run code inspection validation
         run: |
+          cd myApp
           & "${{ github.workspace }}/scripts/validate_report.ps1"
       - name: install report generator tool
         run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path $DOTNET_TOOLS_PATH
