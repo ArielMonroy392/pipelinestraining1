@@ -52,7 +52,6 @@ jobs:
       - name: run code inspection
         run: |
           cd myApp.Tests
-          mkdir reports
           $jbPath = Join-Path $env:DOTNET_TOOLS_PATH "jb.exe"
           Write-Host "Using JetBrains tool at $jbPath"
           & $jbPath inspectcode ./TrainProject.sln -o=reports/report
