@@ -90,6 +90,21 @@ jobs:
       - name: publish
         run: |
           dotnet publish
+  
+  deploy: 
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+    needs: publish
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      - name: deploy
+        run: |
+          echo "Deploying application..."
+          # Add your deployment commands here
+          ./myApp\bin\Release\netcoreapp8\myApp.exe
+
       
 
 
