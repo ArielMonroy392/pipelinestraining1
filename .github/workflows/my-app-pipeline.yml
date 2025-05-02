@@ -59,7 +59,7 @@ jobs:
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
       - name: run code inspection validation
-        run: ./scripts/validate_report.ps1
+        run: ../scripts/validate_report.ps1
       
       - name: install report generator tool
         run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path $DOTNET_TOOLS_PATH
