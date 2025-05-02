@@ -84,8 +84,7 @@ jobs:
 
       - name: publish
         run: |
-          $timestamp = Get-Date -Format "yyyyMMddHHmmss"
-          dotnet publish --configuration Release --output ./publish_output --self-contained true --runtime win-x64 --no-restore --no-build --version-suffix $timestamp
+          dotnet publish
       
 
 
