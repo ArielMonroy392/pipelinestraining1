@@ -44,6 +44,11 @@ jobs:
       - name: test
         run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=reports/coverage
 
+      - name: run code coverage validation
+        run: |
+          cd myApp.Tests
+          & "${{ github.workspace }}/scripts/validate_coverage.ps1"
+
       - name: install jetbrains tool
         run: |
           cd myApp
@@ -66,7 +71,7 @@ jobs:
         run: dotnet tool install dotnet-reportgenerator-globaltool --tool-path $env:DOTNET_TOOLS_PATH
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
-      
+            
       - name: run report generator
         run: |
           $reportGenPath = Join-Path $env:DOTNET_TOOLS_PATH "reportgenerator.exe"

@@ -1,18 +1,20 @@
-$xmlFilePath = "..\myApp.Tests\reports\coverage.cobertura.xml"
+$jsonFilePath = "..\myApp.Tests\reports\coverage.cobertura.json"
 
-# Read the XML file content
-$xmlContent = Get-Content -Path $xmlFilePath -Raw
+# Leer el contenido JSON
+$jsonContent = Get-Content -Path $jsonFilePath -Raw
 
-# Parse the XML content
-[xml]$xmlObject = $xmlContent
+# Parsear JSON
+$jsonObject = $jsonContent | ConvertFrom-Json
 
-[float]$lineRate = $xmlObject.coverage.'line-rate'
+# Asumimos que la tasa de cobertura está en una propiedad tipo:
+# $jsonObject.coverage.lineRate o similar — adapta esto según tu JSON real
+[float]$lineRate = $jsonObject.coverage.'line-rate'
 
-[int32]$rate = $linerate * 100 
+[int32]$rate = $lineRate * 100
 
-If($lineRate -lt 0.8){
+If ($lineRate -lt 0.8) {
     Throw "Lines rate coverage is less than $rate%"
-}else{
+} else {
     Write-Host "Lines rate coverage is $rate%"
     exit 0
 }
