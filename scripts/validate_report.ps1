@@ -1,18 +1,23 @@
-$xmlFilePath = "..\myApp\reports\report"
+$reportPath = "..\myApp\reports\report"
 
-# Read the XML file content
-$xmlContent = Get-Content -Path $xmlFilePath -Raw
+# Leer el contenido JSON
+$jsonContent = Get-Content -Path $reportPath -Raw
 
-# Parse the XML content
-[xml]$xmlObject = $xmlContent
+# Parsear como JSON (SARIF)
+$sarif = $jsonContent | ConvertFrom-Json
 
-$IssuesSev = $xmlObject.Report.Issues.Project.IssueTypes.Severity
-$issues    = $xmlObject.Report.Issues.Project.Issue.Message
+# Extraer los resultados del primer "run"
+$issues = $sarif.runs[0].results
 
-If(($IssuesSev -Contains "Error") -or ($IssuesSev -Contains "Warning")){
-    Throw $($issues -join "`n")
-}else{
+# Extraer los niveles de severidad (level)
+$issueLevels = $issues | ForEach-Object { $_.level }
+$issueMessages = $issues | ForEach-Object { $_.message.text }
+
+# Verificar si hay errores o advertencias
+if ($issueLevels -contains "error" -or $issueLevels -contains "warning") {
+    Throw ($issueMessages -join "`n")
+} else {
     Write-Host "No High Severity Issues Found."
-    Write-Host $issues -Separator "`n"
+    Write-Host ($issueMessages -join "`n")
     exit 0
 }
