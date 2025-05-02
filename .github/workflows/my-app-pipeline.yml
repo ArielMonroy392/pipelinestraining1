@@ -46,7 +46,7 @@ jobs:
 
       - name: install jetbrains tool
         run: |
-          cd myApp.Tests
+          cd myApp
           dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path $env:DOTNET_TOOLS_PATH
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
