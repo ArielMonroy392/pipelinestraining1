@@ -45,13 +45,14 @@ jobs:
         run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=cobertura -p:CoverletOutput=reports/coverage
 
       - name: install jetbrains tool
-        run: dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path $env:DOTNET_TOOLS_PATH
+        run: |
+          cd myApp.Tests
+          dotnet tool install JetBrains.ReSharper.GlobalTools --tool-path $env:DOTNET_TOOLS_PATH
         env:
           DOTNET_TOOLS_PATH: ${{ secrets.DOTNET_TOOLS_PATH }}
 
       - name: run code inspection
         run: |
-          cd myApp.Tests
           $jbPath = Join-Path $env:DOTNET_TOOLS_PATH "jb.exe"
           Write-Host "Using JetBrains tool at $jbPath"
           & $jbPath inspectcode ./TrainProject.sln -o=reports/report
