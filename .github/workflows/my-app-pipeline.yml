@@ -99,7 +99,9 @@ jobs:
           docker build -t myapp:latest .
         
       - name: Log in to GitHub Container Registry
-        run: echo ${{ secrets.GHCR_PAT }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo $env:GHCR_PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        env:
+          GHCR_PAT: ${{ secrets.GHCR_PAT }}
         
       - name: Tag Docker image
         run: docker tag myapp:latest ghcr.io/${{ github.repository_owner }}/pipelinestraining1:latest
