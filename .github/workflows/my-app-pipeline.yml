@@ -106,10 +106,10 @@ jobs:
           password: ${{ secrets.GHCR_PAT }}
         
       - name: Tag Docker image
-        run: docker tag myapp:latest ghcr.io/arielmonroy392/pipelinestraining1:latest
+        run: docker tag myapp:latest ghcr.io/arielmonroy392/pipelinestraining1:1.0.0
       
       - name: Push Docker image to GHCR
-        run: docker push ghcr.io/arielmonroy392/pipelinestraining1:latest
+        run: docker push ghcr.io/arielmonroy392/pipelinestraining1:1.0.0
   deploy: 
     # The type of runner that the job will run on
     runs-on: self-hosted
@@ -117,6 +117,5 @@ jobs:
     steps:
       - name: Deploy 
         run: |
-          docker pull ghcr.io/arielmonroy392/pipelinestraining1:latest
-          docker run ghcr.io/arielmonroy392/pipelinestraining1:latest
+          docker run  ghcr.io/arielmonroy392/pipelinestraining1:1.0.0
     
