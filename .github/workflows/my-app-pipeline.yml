@@ -110,5 +110,13 @@ jobs:
       
       - name: Push Docker image to GHCR
         run: docker push ghcr.io/arielmonroy392/pipelinestraining1:latest
-        
+  deploy: 
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+    needs: publish
+    steps:
+      - name: Deploy 
+        run: |
+          docker pull ghcr.io/arielmonroy392/pipelinestraining1:latest
+          docker run -d -p 8080:80 ghcr.io/arielmonroy392/pipelinestraining1:latest
     
