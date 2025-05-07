@@ -118,5 +118,5 @@ jobs:
       - name: Deploy 
         run: |
           docker pull ghcr.io/arielmonroy392/pipelinestraining1:latest
-          docker run -d -p 8080:80 ghcr.io/arielmonroy392/pipelinestraining1:latest
+          docker run ghcr.io/arielmonroy392/pipelinestraining1:latest
     
