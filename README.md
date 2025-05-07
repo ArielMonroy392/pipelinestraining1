@@ -80,4 +80,4 @@ dotnet add myApp.Tests/myApp.Tests.csproj reference myApp/myApp.csproj
 
  -->
  
- ## version 2
+ ## version 3
