@@ -2,6 +2,10 @@
 
 name: CI
 
+permissions:
+  contents: read # for checkout action
+  packages: write # for pushing docker image to GHCR
+
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -85,7 +89,6 @@ jobs:
     needs: test
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
 
       - name: publish
         run: |
